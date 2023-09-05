@@ -132,7 +132,25 @@ curl -X POST -H "Content-Type: application/json" -d '{
   "query": "mutation { deleteTodo(id: 354) { name info id } }"
 }' localhost:8080/graphql
 ```
-
-
+## List all todo items
+All todo items can be listed with the following query:
+```graphql
+query getTodos {
+  getAllTodos {
+    name
+    info
+    id
+    done
+    createdAt
+    updatedAt
+  }
+}
+```
+Using curl:
+```bash
+curl -X POST -H "Content-Type: application/json" -d '{
+  "query": "query { getAllTodos { name info id done createdAt updatedAt} }"
+}' localhost:8080/graphql
+```
 
 
