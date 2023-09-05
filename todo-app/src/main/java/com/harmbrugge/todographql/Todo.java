@@ -23,7 +23,7 @@ public class Todo {
     private LocalDateTime createdAt;
     private LocalDateTime updatedAt;
 
-    public int getId() {
+    public Integer getId() {
         return id;
     }
 
@@ -70,4 +70,6 @@ public class Todo {
     public void setUpdatedAt(LocalDateTime updatedAt) {
         this.updatedAt = updatedAt;
     }
+
+
 }
