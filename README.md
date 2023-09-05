@@ -28,10 +28,9 @@ Run docker compose inside the project directory:
 ```bash
 docker compose up
 ```
-The application will be attached to port 8080 by default, this can be configured using the .env file 
+The application will be attached to port 6868 by default, this can be configured using the .env file
 
 ## GraphQL
-
 A todo item is defined using the following GraphQL scheme:
 ```graphql
 type Todo {
@@ -54,6 +53,9 @@ type Mutation {
 }
 ```
 
+Spring will provide an interface to test your queries at:
+http://localhost:6868/graphiql?path=/graphql
+
 ## Add a todo item
 Given the above scheme, a todo item can be added using the following syntax:
 ```graphql
@@ -68,14 +70,12 @@ mutation createTodo {
   }
 }
 ```
-Spring will provide an interface to test your queries at:
-http://localhost:8080/graphiql?path=/graphql
 
 Or you can use curl to post a request:
 ```bash
 curl -X POST -H "Content-Type: application/json" -d '{
   "query": "mutation { createTodo(name: \"Do the dishes\", info: \"Use the right detergent\") { name info id } }"
-}' localhost:8080/graphql
+}' localhost:6868/graphql
 ```
 
 A successful response will yield the todo item with the database identifier
@@ -112,7 +112,7 @@ Using curl:
 ```bash
 curl -X POST -H "Content-Type: application/json" -d '{
   "query": "mutation { updateTodo(id: 1, name: \"Do the dishes!\", info: \"Use the best detergent\", done: true) { name info id } }"
-}' localhost:8080/graphql
+}' localhost:6868/graphql
 ```
 
 ## Delete a todo item
@@ -130,7 +130,7 @@ Using curl:
 ```bash
 curl -X POST -H "Content-Type: application/json" -d '{
   "query": "mutation { deleteTodo(id: 354) { name info id } }"
-}' localhost:8080/graphql
+}' localhost:6868/graphql
 ```
 ## List all todo items
 All todo items can be listed with the following query:
@@ -150,7 +150,7 @@ Using curl:
 ```bash
 curl -X POST -H "Content-Type: application/json" -d '{
   "query": "query { getAllTodos { name info id done createdAt updatedAt} }"
-}' localhost:8080/graphql
+}' localhost:6868/graphql
 ```
 
 
