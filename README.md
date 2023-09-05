@@ -31,7 +31,7 @@ docker compose up
 The application will be attached to port 6868 by default, this can be configured using the .env file
 
 ## GraphQL
-A todo item is defined using the following GraphQL scheme:
+A todo item is defined using the following GraphQL schema:
 ```graphql
 type Todo {
     id: ID
@@ -57,7 +57,7 @@ Spring will provide an interface to test your queries at:
 http://localhost:6868/graphiql?path=/graphql
 
 ## Add a todo item
-Given the above scheme, a todo item can be added using the following syntax:
+Given the above schema, a todo item can be added using the following syntax:
 ```graphql
 mutation createTodo {
   createTodo(
