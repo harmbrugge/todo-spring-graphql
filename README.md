@@ -7,7 +7,7 @@ This is a sample application for the creation of todo items.
 - Create, read, update, and delete todos using GraphQL APIs.
 - Spring Boot backend.
 - MySQL database for data persistence.
-- The Project is wrapped in a docker container.
+- The project is wrapped in a docker container.
 
 ## Prerequisites
 
