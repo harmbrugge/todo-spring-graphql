@@ -54,9 +54,85 @@ type Mutation {
 }
 ```
 
-# Add a todo item
+## Add a todo item
+Given the above scheme, a todo item can be added using the following syntax:
+```graphql
+mutation createTodo {
+  createTodo(
+      name: "Do the dishes",
+      info: "Use the right detergent"
+  ) {
+    name
+    info
+    id
+  }
+}
+```
+Spring will provide an interface to test your queries at:
+http://localhost:8080/graphiql?path=/graphql
+
+Or you can use curl to post a request:
 ```bash
 curl -X POST -H "Content-Type: application/json" -d '{
-  "query": "mutation { createTodo(name: \"New Todo\", info: \"Description of the new todo\") { id name info done createdAt updatedAt } }"
-}' localhost:8080
+  "query": "mutation { createTodo(name: \"Do the dishes\", info: \"Use the right detergent\") { name info id } }"
+}' localhost:8080/graphql
 ```
+
+A successful response will yield the todo item with the database identifier
+```graphql
+{
+  "data": {
+    "createTodo": {
+      "name": "Do the dishes",
+      "info": "Use the right detergent",
+      "id": "1"
+    }
+  }
+}
+```
+
+
+## Update a todo item
+A todo item can be updated using the database identifier
+```graphql
+mutation updateTodo {
+  updateTodo(
+    id: 1,
+    name: "Do the dishes"
+    info: "Use the best detergent"
+    done: true,
+  ) {
+    name
+    info
+    id
+  }
+}
+```
+Using curl:
+```bash
+curl -X POST -H "Content-Type: application/json" -d '{
+  "query": "mutation { updateTodo(id: 1, name: \"Do the dishes!\", info: \"Use the best detergent\", done: true) { name info id } }"
+}' localhost:8080/graphql
+```
+
+## Delete a todo item
+A todo item can be deleted using the corresponding database identifier
+```graphql
+mutation deleteTodo {
+  deleteTodo(
+    id: 1
+  ) {
+    name
+  }
+}
+```
+Using curl:
+```bash
+curl -X POST -H "Content-Type: application/json" -d '{
+  "query": "mutation { deleteTodo(id: 354) { name info id } }"
+}' localhost:8080/graphql
+```
+
+
+
+
